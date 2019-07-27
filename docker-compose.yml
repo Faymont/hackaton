@@ -1,0 +1,74 @@
+version: '2'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: ${PROJECT_NAME}-nginx
+    links:
+      - api
+    depends_on:
+      - api
+    networks:
+      - for_people-network
+    volumes:
+      - for_people_nginx-cache:/cache
+      - ./configs/nginx/nginx-${ENVIRONMENT}.conf:/etc/nginx/nginx.conf
+      - ./log:/var/log/nginx
+      - ./api/media:/usr/share/nginx/api_media
+      - ./api/static:/usr/share/nginx/api_static
+    ports:
+      - 80:80
+    restart: always
+
+  postgres:
+    image: postgres:10.3-alpine
+    container_name: ${PROJECT_NAME}-postgres
+    volumes:
+      - for_people_postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    restart: always
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    networks:
+      - for_people-network
+
+  api:
+    build:
+      context: .
+      args:
+        - project_name=${PROJECT_NAME}
+        - uid=${DOCKER_UID}
+        - username=${DOCKER_USERNAME}
+        - environment=${ENVIRONMENT}
+      dockerfile: ./configs/api/Dockerfile
+    image: ${PROJECT_NAME}-api:${ENVIRONMENT}
+    container_name: ${PROJECT_NAME}-api
+    env_file: .env
+    hostname: api.${BASE_DOMAIN}
+    command: gunicorn -c gunicorn.ini project.wsgi:application
+    networks:
+      - for_people-network
+    volumes:
+      - ./log:/opt/project/api/log
+      - ./api/media:/opt/project/api/media
+      - ./api/static:/opt/project/api/static
+    ports:
+      - ${SERVER_PORT}:8080
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      - DJANGO_SETTINGS_MODULE=project.settings
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=postgres
+
+volumes:
+  for_people_postgres_data:
+  for_people_nginx-cache:
+
+
+networks:
+  for_people-network:

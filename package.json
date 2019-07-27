@@ -1,0 +1,17 @@
+{
+  "name": "forPeople",
+  "version": "1.0.0",
+  "description": "forPeople",
+  "scripts": {
+    "prepush": "make linter",
+    "test": "make test"
+  },
+  "devDependencies": {
+    "husky": "^0.13.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "forPeople"
+}

@@ -1,0 +1,24 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff
+*.log
+local_settings.py
+
+# Development files
+Dockerfile
+.gitignore
+.dockerignore
+
+# Static and media
+api/media/
+
+# Environments
+api/python3
+api/venv

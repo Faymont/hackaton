@@ -1,0 +1,66 @@
+strictness: veryhigh
+test-warnings: true
+doc-warnings: true
+
+pep8:
+  run: true
+  full: true
+  #  disable:
+  #   - W602
+  #   - W603
+  enable:
+    - W601
+  options:
+    max-line-length: 130
+    single-line-if-stmt: n
+
+pep257:
+  run: false
+  disable:
+    - D200
+    - D212
+
+pylint:
+  run: false
+  options:
+    max-line-length: 130
+    single-line-if-stmt: n
+
+pyroma:
+  run: false
+
+mccabe:
+  run: true
+  options:
+    max-complexity: 10
+  disable:
+    - MC0001
+
+dodgy:
+  run: true
+  disable:
+    - D200
+    - D212
+
+pyflakes:
+  run: true
+  disable:
+    - F403
+    - F999
+
+frosted:
+  run: false
+
+uses:
+  - django
+
+ignore-paths:
+  - migrations
+  - manage.py
+  - wsgi.py
+  - settings.py
+  - tests/factory.py
+  - tests/conftest.py
+  - python3.6
+  - python3
+  - frontend/

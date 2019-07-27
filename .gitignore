@@ -1,0 +1,32 @@
+.idea
+
+*.pyc
+*.log
+*.socket
+*.ipynb
+
+__pycache__/
+.cache
+
+
+python3/
+python2/
+venv/
+env/
+
+# media and static
+media/
+static/
+
+dockerfiles/*.env
+.env
+node_modules
+.DS_Store
+package-lock.json
+
+# frontend
+.sass-cache
+*.log
+*.map
+*.sublime-*
+Thumbs.db

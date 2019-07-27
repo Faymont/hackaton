@@ -1,0 +1,21 @@
+##################
+# DJANGO         #
+##################
+django-cors-headers==2.1.0
+
+##################
+# TEST           #
+##################
+prospector==0.12.6
+frosted==1.4.1
+pyroma==2.0.2
+pytest-django==3.1.2
+mock==2.0.0
+coverage==4.4.1
+factory-boy==2.8.1
+
+##################
+# SHELL          #
+##################
+notebook
+django-extensions
