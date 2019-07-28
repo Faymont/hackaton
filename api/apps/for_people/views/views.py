@@ -40,27 +40,24 @@ class QuestionRedeem(APIView):
 
     def post(self, request, *args, **kwargs):
 
-        ticket = request.session.get('ticket', None)
-        if not ticket:
-            return Response(_(f'Вы не ввели номер талона'))
-
-        ticket_object = Ticket.objects.get(name=request.session["ticket"])
-
-        if ticket_object.is_passed:
-            return Response(_(f'Тест уже пройден'))
-
         serializer = ItemsAnswerSerializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)
 
-        ticket = Ticket.objects.get(name=request.session["ticket"])
-        subject = ticket.subject
+        ticket = serializer.data['ticket']
+
+        ticket_object = Ticket.objects.get(name=ticket)
+
+        if ticket_object.is_passed:
+            return Response(_(f'Тест уже пройден'))
+
+        subject = ticket_object.subject
         polyclinic = subject.polyclinic
 
         l = list(serializer.data['answers'])
 
-        answer_subject = l[:2]
-        answer_polyclinic = l[2:]
+        answer_subject = l[:3]
+        answer_polyclinic = l[3:]
 
         for item in answer_subject:
             id, ans = item.items()

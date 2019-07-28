@@ -6,9 +6,9 @@ from .validators import JSONSchemaValidator, DIGIT_JSON_FIELD_SCHEMA
 
 
 class Ticket(models.Model):
-    name = models.IntegerField('Номер талона', unique=True)
+    name = models.CharField('Номер талона', unique=True, max_length=100)
     is_passed = models.BooleanField('Пройден',default=False)
-    subject = models.OneToOneField(
+    subject = models.ForeignKey(
         'Subject', verbose_name='Пользователь',
         related_name='ticket_subject',
         on_delete=models.CASCADE

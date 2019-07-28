@@ -1,26 +1,27 @@
-## /api/users/ — Содержит api для работы с пользователями 
+## /api/for_people/ — Содержит api для работы с тестами 
 
 ---
 
-### /api/users/login/
-Аутентификация по паролю.
+### /api/for_people/ticket/
+Отправка номер талона, в ответ получаем 5 вопросов
 #### Методы:
 * POST
 #### POST Параметры:
-* email(`EmailField`) **REQUIRED** — "Email"
-* password(`CharField`) **REQUIRED** — "Пароль"
+* ticket: (`CharField`) **REQUIRED** — "Номер талона."
 #### POST Возвращает:
-* id: (`IntegerField`) — "ID"
-* email: (`EmailField`) — "Email адрес"
-* username: (`CharField`) — "Ник"
-* date_joined: (`DateTimeField`)
-* social_auth: (`ManyRelatedField`) — "Список соц. сетей пользователя"
+* array: (`ArrayField`) - "Вопросы."
+    * id: (`IntegerField`) — "ID вопроса."
+    * question: (`CharField`) — "Содержимое вопроса."
 
 ---
 
-#### /api/users/logout/
-Выход
+### /api/for_people/redeem/
+Отправка ответов на вопросы
 #### Методы:
-* GET
+* POST
+#### POST Параметры:
+* answers: (`ArrayField`) - "Ответы."
+    * id: (`IntegerField`) — "ID вопроса."
+    * answer: (`IntegerField`) — "Оценка."
 
 ---

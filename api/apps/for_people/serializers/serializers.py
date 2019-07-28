@@ -6,7 +6,7 @@ from apps.for_people.models import Ticket, QuestionSubject, QuestionPolyclinic, 
 
 class TicketSerializer(serializers.Serializer):
     """ Сериалайзер для Талонов """
-    ticket = serializers.IntegerField(label='Номер талона')
+    ticket = serializers.CharField(label='Номер талона')
 
 
 class QuestionSubjectSerializer(serializers.ModelSerializer):
@@ -28,3 +28,4 @@ class AnswerSerializer(serializers.Serializer):
 
 class ItemsAnswerSerializer(serializers.Serializer):
     answers = serializers.ListField(child=AnswerSerializer())
+    ticket = serializers.CharField()

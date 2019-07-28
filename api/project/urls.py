@@ -17,7 +17,7 @@ urlpatterns = [
         path('for_people/', include('apps.for_people.urls', namespace='for_people')),
     ], 'api'), namespace='api')),
 
-    path('admin/', admin.site.urls),
+    path('for_people_admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:

@@ -29,7 +29,7 @@ api_shell:
 	docker-compose exec api bash
 
 db_shell:
-	docker-compose exec postgres psql hackaton -U forpeople
+	docker-compose exec postgres psql hackaton -U for_people
 
 fixtures:
 	@if [ "$(environment)" = "development" ] ; then\

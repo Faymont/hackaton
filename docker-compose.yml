@@ -16,12 +16,13 @@ services:
       - ./log:/var/log/nginx
       - ./api/media:/usr/share/nginx/api_media
       - ./api/static:/usr/share/nginx/api_static
+      - ./api/apps/static/:/usr/share/nginx/
     ports:
       - 80:80
     restart: always
 
   postgres:
-    image: postgres:10.3-alpine
+    image: postgres:11.0-alpine
     container_name: ${PROJECT_NAME}-postgres
     volumes:
       - for_people_postgres_data:/var/lib/postgresql/data
